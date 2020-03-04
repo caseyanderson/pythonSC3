@@ -85,7 +85,6 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 2. Select all of the code in `receiver.scd` (**Command+A**) and run it (**Shift+Enter**). You should hear a sine tone playing and see something like this in the `post`:
 
     ![](assets/server_boot.png)
-    <img width="668" alt="Screen Shot 2020-02-27 at 4 30 29 PM" src="https://user-images.githubusercontent.com/1832169/75499314-8c8f8e80-59c1-11ea-85a6-8e6aa8f9cf03.png">
 
 
 ### Python
@@ -125,19 +124,16 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 5. Double check the permissions on that file: `ls -l sender.py`. You should see something like this in the Terminal:
 
     ![](assets/before_chmod.png)
-    <img width="794" alt="Screen Shot 2020-02-27 at 5 00 31 PM" src="https://user-images.githubusercontent.com/1832169/75500745-ca8eb180-59c5-11ea-9fe7-b5f4c4d046cd.png">
 
     Looking more closely at the output of `ls -l sender.py` we see the following file permissions:
 
     ![](assets/permissions.png)
-    <img width="105" alt="Screen Shot 2020-02-27 at 5 02 53 PM" src="https://user-images.githubusercontent.com/1832169/75500935-5274bb80-59c6-11ea-99fe-9316653d04c9.png">
 
 
 6. The last dash in that image is currently empty. We need to make it `executable`, which will replace the last dash with an `x`: `sudo chmod +x sender.py`
 7. Check permissions once more to confirm that `sender.py` is now `executable` (the output of your terminal should resemble the image below, note the `x` at the end of the file permission output): `ls -l sender.py`
 
     ![](assets/after_chmod.png)
-    <img width="794" alt="Screen Shot 2020-02-27 at 5 11 05 PM" src="https://user-images.githubusercontent.com/1832169/75501210-3a516c00-59c7-11ea-92b7-83dd222dfef5.png">
 
 8. In the terminal, run `sender.py` to change the frequency of the playing sine tone: `python3 sender.py`
 9. Run `sender.py` one more time, but pick your own frequency (note: it **has** to be a `float`): `python3 sender.py --freq 400.0`
