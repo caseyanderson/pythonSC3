@@ -18,7 +18,7 @@ s.waitForBoot({
 
     s.sync;
 
-	~dur = {exprand(0.5, 6.0)};
+    ~dur = {exprand(0.5, 6.0)};
 
     Synth.new( \sin, [ \amp, 0.9, \trig, 0 ] );
 
