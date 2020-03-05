@@ -19,7 +19,7 @@
 
 
 ### Install pyOSC3
-*This sections assumes an existing installation of `Python 3` and `pip3`. For instructions, see [here](https://gist.github.com/caseyanderson/0c1f508acaac2f2afd77966af44f7dee)*
+*This sections assumes an existing installation of* `Python 3` *and* `pip3`. *For instructions, see [here](https://gist.github.com/caseyanderson/0c1f508acaac2f2afd77966af44f7dee)*
 
 Run the following command in the terminal to install [pyOSC3](https://github.com/Qirky/pyOSC3): `pip3 install pyOSC3`
 
