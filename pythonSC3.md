@@ -64,7 +64,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 	    SynthDef( \sin, { | amp = 0.0, freq = 333, trig = 0 |
 		    var env, sig;
 
-		    env = EnvGen.kr( Env.asr( 0.001, 0.9, 0.001 ), trig, doneAction: 0 );
+		    env = EnvGen.kr( Env.asr( 0.001, 0.9, 0.001 ), trig, doneAction: 2 );
 		    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
 		    Out.ar( 0, sig  );
 	    }).add;
