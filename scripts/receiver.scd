@@ -12,15 +12,13 @@ s.waitForBoot({
 	    var env, sig;
 
 	    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
-	    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
-	    Out.ar( 0, sig  );
+	    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp );
+	    Out.ar( 0, env * sig  );
     }).add;
 
     s.sync;
 
     ~dur = {exprand(0.5, 6.0)};
-
-    Synth.new( \sin, [ \amp, 0.9, \trig, 0 ] );
 
     x = OSCFunc( { | msg, time, addr, port |
 		var dur, freq, fund = 200, partial;
