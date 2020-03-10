@@ -204,7 +204,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 2. next we declare two variables: `env` and `sig`
 
-    *. `env`:
+    * `env`:
 
         1. the `env` variable stores the `SynthDef`'s `Envelope Generator`, `EnvGen.kr`, here set to generate a `linear` Envelope with `Env.linen`. There are lots of different `Envelope` instances, which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` durations
         2. the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
