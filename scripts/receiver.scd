@@ -30,7 +30,7 @@ s.waitForBoot({
 
 		( "freq is" + freq + "dur is" + dur ).postln;
 
-		Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
+		Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] );
 
 	}, "/engine" );
 });
