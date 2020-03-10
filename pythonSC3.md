@@ -197,16 +197,18 @@ The above `SynthDef` shows an example of the usage of two critical arguments:
 The example SynthDef above is named `\sin`. Note: it's important to be consistent when naming SynthDef's, a `Symbol` and a `String` cannot be used interchangeably.
 
 The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Following along as we go through it line-by-line:
+
 1. first we set arguments, to be used later in the SynthDef, and default values for those arguments. Note that I am using the `|` notation to surround my list of arguments
 
     ![](assets/args_synthdef.png)
 
 2. next we declare two variables: `env` and `sig`
+
     *. `env`:
+
         1. the `env` variable stores the `SynthDef`'s `Envelope Generator`, `EnvGen.kr`, here set to generate a `linear` Envelope with `Env.linen`. There are lots of different `Envelope` instances, which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` durations
         2. the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
         3. `doneActions`: `doneActions` tell the Server what to do when the Synth is done. In this case the Server will free, or remove, the Synth when at the end of the Envelope (where duration is attack + sustain + release)
-3.
 
 
 ### sender.py
