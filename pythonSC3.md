@@ -64,11 +64,11 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
     s.waitForBoot({
 
         SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
-	    var env, sig;
+            var env, sig;
 
             env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
             sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
-	    Out.ar( 0, sig  );
+            Out.ar( 0, sig  );
     }).add;
 
     s.sync;
