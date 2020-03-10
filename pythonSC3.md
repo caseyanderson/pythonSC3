@@ -83,7 +83,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
             freq = msg[1] * fund;
             dur = ~dur.value;
             ( "freq is" + freq + "dur is" + dur ).postln;
-            Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
+            Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] );
         }, "/engine" );
     });
     ```
@@ -201,7 +201,11 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
     ![](assets/args_synthdef.png)
 
-2. next we declare two variables: `env` and `sig`. I like breaking my SynthDef's up into variables for organizational and debugging purposes
+2. next we declare two variables: `env` and `sig`
+    *. `env`:
+        1. the `env` variable stores the `SynthDef`'s `Envelope Generator`, `EnvGen.kr`, here set to generate a `linear` Envelope with `Env.linen`. There are lots of different `Envelope` instances, which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` durations
+        2. the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
+        3. `doneActions`: `doneActions` tell the Server what to do when the Synth is done. In this case the Server will free, or remove, the Synth when at the end of the Envelope (where duration is attack + sustain + release)
 3.
 
 
