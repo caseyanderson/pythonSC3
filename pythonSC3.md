@@ -198,19 +198,22 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 1. first we set arguments, to be used later in the SynthDef, and default values for those arguments. Note that I am using the `|` notation to surround my list of arguments
 
-    ![](assets/args_synthdef.png)
+    `| amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |`
 
 2. next we declare two variables: `env` and `sig`
 
-    * `env`:
+    * `env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 )`
 
         1. the `env` variable stores the `SynthDef`'s `Envelope Generator`, `EnvGen.kr`, here set to generate a `linear` Envelope with `Env.linen`. There are lots of different `Envelope` instances, which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` durations
         2. the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
         3. `doneActions`: `doneActions` tell the `scserver` what to do when the `Synth` is done. In this case the `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where duration is `attack` + `sustain` + `release`)
 
-    * `sig`:
+    * `sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp )`
 
-        1.
+        1. we use `multichannel expansion` on the `SinOsc` `frequency` argument to create a slight throb, via difference tones, and to convert our `Mono` `Synth` to `Stereo`
+        2. we set `phase` to 0.0
+        3. we use the argument `amp` to create a placeholder for the `SinOsc` `amplitude`
+
 
 ### sender.py
 
