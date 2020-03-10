@@ -146,7 +146,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
 #### UGens
 
-[This](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is heavily referenced throughout.
+([this](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is heavily referenced throughout)
 
 A `UGen`, or unit generator, is an object that processes or generates sounds. SuperCollider ships with an extensive collection of pre-defined `UGens` which one can explore [here](https://doc.sccode.org/Guides/Tour_of_UGens.html).
 
@@ -167,6 +167,21 @@ As one can see in the docs, the `SinOsc` `UGen` can be instantiated at both audi
 
 
 #### SynthDefs
+
+A `SynthDef`, or Synth Definition, tells the server how to generate audio and translates that information to bite code. `SynthDef`s describe the structure of an instance of a `Synth` in a manner similar to the relationship between a cake recipe and the cake produced by following that recipe.
+
+*For Example*
+
+```supercollider
+SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
+	    var env, sig;
+
+	    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
+	    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
+	    Out.ar( 0, sig  );
+    }).add;
+```
+
 
 ### sender.py
 
