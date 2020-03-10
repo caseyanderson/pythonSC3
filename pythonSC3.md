@@ -86,7 +86,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
     });
     ```
 
-2. Select all of the code in `receiver.scd` (**Command+A**) and run it (**Shift+Enter**). You should hear a sine tone playing and see something like this in the `post`:
+2. Select all of the code in `receiver.scd` (**Command+A**) and run it (**Shift+Enter**). You should see something like this in the `post`:
 
     ![](assets/server_boot.png)
 
