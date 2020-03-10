@@ -81,12 +81,9 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
         var dur, freq, fund = 200, partial;
 
         freq = msg[1] * fund;
-	dur = ~dur.value;
-
-	( "freq is" + freq + "dur is" + dur ).postln;
-
-	Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
-
+        dur = ~dur.value;
+        ( "freq is" + freq + "dur is" + dur ).postln;
+        Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
         }, "/engine" );
     });
     ```
