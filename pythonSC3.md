@@ -146,7 +146,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
 #### UGens
 
-([this](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is heavily referenced throughout)
+([this](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is referenced throughout)
 
 A `UGen`, or unit generator, is an object that processes or generates sounds. SuperCollider ships with an extensive collection of pre-defined `UGens` which one can explore [here](https://doc.sccode.org/Guides/Tour_of_UGens.html).
 
@@ -163,12 +163,14 @@ Not all `UGens` can be instantiated at both audio and control rate, though, so i
 
 ![](assets/SinOscClassMethods.png)
 
-As one can see in the docs, the `SinOsc` `UGen` can be instantiated at both audio and control rate.
+As one can see in the docs, the `SinOsc` `UGen` can be instantiated at both `audio` and `control rate`.
 
 
 #### SynthDefs
 
-A `SynthDef`, or Synth Definition, tells the server how to generate audio and translates that information to bite code. `SynthDef`s describe the structure of a `Synth`, or a client-side representation of a synth node on the server. The relationship between a `SynthDef` and a `Synth` is similar to the relationship between a cake recipe and the cake produced by following that recipe.
+([this](http://doc.sccode.org/Classes/SynthDef.html) article is referenced throughout)
+
+A `SynthDef`, or `Synth Definition`, tells the server how to generate audio and translates that information to bite code. `SynthDef`s describe the structure of a `Synth`, or a client-side representation of a synth node on the server. The relationship between a `SynthDef` and a `Synth` is similar to the relationship between a cake recipe and the cake produced by following that recipe.
 
 *For Example*
 
@@ -181,6 +183,14 @@ SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, 
 	    Out.ar( 0, sig  );
     }).add;
 ```
+
+The above `SynthDef` shows an example of the usage of two critical arguments:
+
+* `name`: a `Symbol` (beginning with `\`) or `String` (surrounded by "") used to identify the `SynthDef`
+* `ugenGraphFunc`: a `Function` specifying how the `SynthDef`'s `UGens` interact
+
+The example SynthDef above is named `\sin`. Note: it's important to be consistent when naming SynthDef's, a `Symbol` and a `String` cannot be used interchangeably.
+
 
 
 ### sender.py
