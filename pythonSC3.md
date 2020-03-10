@@ -54,32 +54,40 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
     ```supercollider
     /*
-        receiver.scd
-        SC receives message (beginning with "/engine") from Python
+
+    receiver.scd (v1)
+    SC receives message (beginning with "/engine") from Python
 
     */
 
+    s.options.memSize = 2097152;
     s.waitForBoot({
 
-	    SynthDef( \sin, { | amp = 0.0, freq = 333, trig = 0 |
-		    var env, sig;
+        SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
+	    var env, sig;
 
-		    env = EnvGen.kr( Env.asr( 0.001, 0.9, 0.001 ), trig, doneAction: 2 );
-		    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
-		    Out.ar( 0, sig  );
-	    }).add;
+            env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
+            sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
+	    Out.ar( 0, sig  );
+    }).add;
 
-	    s.sync;
+    s.sync;
 
-	    h = Synth( \sin, [ \amp, 0.8, \trig, 1 ] );
+    ~dur = {exprand(0.5, 6.0)};
 
-	    x = OSCFunc( { | msg, time, addr, port |
-		    var pyFreq;
+    Synth.new( \sin, [ \amp, 0.9, \trig, 0 ] );
 
-		    pyFreq = msg[1].asFloat;
-		    ( "freq is " + pyFreq ).postln;
-		    h.set( \freq, pyFreq );
-	    }, "/engine" );
+    x = OSCFunc( { | msg, time, addr, port |
+        var dur, freq, fund = 200, partial;
+
+        freq = msg[1] * fund;
+	dur = ~dur.value;
+
+	( "freq is" + freq + "dur is" + dur ).postln;
+
+	Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
+
+        }, "/engine" );
     });
     ```
 
@@ -176,12 +184,12 @@ A `SynthDef`, or `Synth Definition`, tells the server how to generate audio and 
 
 ```supercollider
 SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
-	    var env, sig;
+    var env, sig;
 
-	    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
-	    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
-	    Out.ar( 0, sig  );
-    }).add;
+    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
+    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
+    Out.ar( 0, sig  );
+}).add;
 ```
 
 The above `SynthDef` shows an example of the usage of two critical arguments:
@@ -190,6 +198,8 @@ The above `SynthDef` shows an example of the usage of two critical arguments:
 * `ugenGraphFunc`: a `Function` specifying how the `SynthDef`'s `UGens` interact
 
 The example SynthDef above is named `\sin`. Note: it's important to be consistent when naming SynthDef's, a `Symbol` and a `String` cannot be used interchangeably.
+
+The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Following along as we go through it line-by-line:
 
 
 
