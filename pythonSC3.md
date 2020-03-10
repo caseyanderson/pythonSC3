@@ -168,7 +168,7 @@ As one can see in the docs, the `SinOsc` `UGen` can be instantiated at both audi
 
 #### SynthDefs
 
-A `SynthDef`, or Synth Definition, tells the server how to generate audio and translates that information to bite code. `SynthDef`s describe the structure of an instance of a `Synth` in a manner similar to the relationship between a cake recipe and the cake produced by following that recipe.
+A `SynthDef`, or Synth Definition, tells the server how to generate audio and translates that information to bite code. `SynthDef`s describe the structure of a `Synth` similar to the relationship between a cake recipe and the cake produced by following that recipe.
 
 *For Example*
 
