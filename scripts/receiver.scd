@@ -25,10 +25,7 @@ s.waitForBoot({
 
 		freq = msg[1] * fund;
 		dur = ~dur.value;
-
 		( "freq is" + freq + "dur is" + dur ).postln;
-
 		Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] );
-
 	}, "/engine" );
 });
