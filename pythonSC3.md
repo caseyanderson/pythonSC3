@@ -69,21 +69,21 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
             env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
             sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
             Out.ar( 0, sig  );
-    }).add;
+        }).add;
 
-    s.sync;
+        s.sync;
 
-    ~dur = {exprand(0.5, 6.0)};
+        ~dur = {exprand(0.5, 6.0)};
 
-    Synth.new( \sin, [ \amp, 0.9, \trig, 0 ] );
+        Synth.new( \sin, [ \amp, 0.9, \trig, 0 ] );
 
-    x = OSCFunc( { | msg, time, addr, port |
-        var dur, freq, fund = 200, partial;
+        x = OSCFunc( { | msg, time, addr, port |
+            var dur, freq, fund = 200, partial;
 
-        freq = msg[1] * fund;
-        dur = ~dur.value;
-        ( "freq is" + freq + "dur is" + dur ).postln;
-        Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
+            freq = msg[1] * fund;
+            dur = ~dur.value;
+            ( "freq is" + freq + "dur is" + dur ).postln;
+            Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, ~dur.value, \trig, 1 ] );
         }, "/engine" );
     });
     ```
