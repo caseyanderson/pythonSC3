@@ -197,7 +197,12 @@ The above `SynthDef` shows an example of the usage of two critical arguments:
 The example SynthDef above is named `\sin`. Note: it's important to be consistent when naming SynthDef's, a `Symbol` and a `String` cannot be used interchangeably.
 
 The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Following along as we go through it line-by-line:
+1. first we set arguments, to be used later in the SynthDef, and default values for those arguments. Note that I am using the `|` notation to surround my list of arguments
 
+    ![](assets/args_synthdef.png)
+
+2. next we declare two variables: `env` and `sig`. I like breaking my SynthDef's up into variables for organizational and debugging purposes
+3.
 
 
 ### sender.py
