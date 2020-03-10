@@ -144,7 +144,24 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
 ### receiver.scd
 
-explanations go here
+#### UGens and SynthDefs
+
+[This](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is heavily referenced throughout.
+
+A `UGen`, or unit generator, is an object that processes or generates sounds. SuperCollider ships with an extensive collection of pre-defined UGens which one can explore [here](https://doc.sccode.org/Guides/Tour_of_UGens.html).
+
+A `UGen` is created by sending the `UGen` class a `.ar` or `.kr` message.
+
+*For example*
+
+`SinOsc.ar` will result in an `audio rate` Sine Oscillator
+`SinOsc.kr` will result in a `control rate` Sine Oscillator
+
+Not all `UGens` can be instantiated at both audio and control rate, though, so it is best practice to double check the Class Methods for each UGen prior to use.
+
+*For Example*
+
+![](assets/SinOscClassMethods.png)
 
 
 ### sender.py
