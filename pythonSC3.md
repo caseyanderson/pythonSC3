@@ -75,7 +75,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
         ~dur = {exprand(0.5, 6.0)};
 
-        x = OSCFunc( { | msg, time, addr, port |
+        OSCFunc( { | msg, time, addr, port |
             var dur, freq, fund = 200, partial;
 
             freq = msg[1] * fund;
@@ -222,6 +222,9 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
         * `channelsArray`: the (sound) signal that you want to send to the bus
 
     * In our example (above) `bus` is set to `0` and `channelsArray` applies the `Envelope` to the `SinOsc` (by multiplying `env` by `sig`). Note: the output signal is stereo because we used `multichannel expansion` in the `freq` parameter of `SinOsc`.
+
+#### OSCFunc
+
 
 ### sender.py
 
