@@ -242,13 +242,13 @@ OSCFunc( { | msg, time, addr, port |
 
 The `OSCFunc` above handles all of our control messages from Python, follow along as we go through it line-by-line:
 
-1. we start by setting arguments `OSCFunc`
+1. we start by setting arguments for `OSCFunc`
 
     `| msg, time, addr, port |`
 
-    Note: the above is **straight out of the docs for** `OSCFunc`
+    Note: this is **straight out of the docs for** `OSCFunc`
 
-2. next we declare variables and set the default values we need
+2. next we declare variables and set any default values we need
 
     `var dur, freq, fund = 200, partial`
 
@@ -256,7 +256,9 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
 3. `freq = msg[1] * fund`
 
-    An `OSCFunc` is capable of parsing `OpenSoundControl` messages and triggering events. Messages from elsewhere arrive to our OSCFunc in a standardized format: `[address, data]`. In other words `msg[0]` will contain the `address`, or label, the `OSCFunc` uses to identify a particular message and `msg[1]` will contain the data we want to use.
+    An `OSCFunc` is capable of parsing `OpenSoundControl` messages and triggering events. Messages from elsewhere arrive to our `OSCFunc` in a standardized format: `[address, data]`. In other words `msg[0]` will contain the `address`, or label, the `OSCFunc` uses to identify a the correct message and `msg[1]` will contain the data we want to use. In our example we multiply the data by the variable `fund`, which we stores the `fundamental frequency` of our `SinOsc`, and store the result to `freq`.
+
+4.
 
 
 
