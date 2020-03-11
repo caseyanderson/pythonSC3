@@ -151,7 +151,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
 ([this](https://doc.sccode.org/Guides/UGens-and-Synths.html) article is referenced throughout)
 
-A `UGen`, or unit generator, is an object that processes or generates sounds. SuperCollider ships with an extensive collection of pre-defined `UGens` which one can explore [here](https://doc.sccode.org/Guides/Tour_of_UGens.html).
+A `UGen`, or `unit generator, is an object that processes or generates sounds. `SuperCollider` ships with an extensive collection of pre-defined `UGens` which one can explore [here](https://doc.sccode.org/Guides/Tour_of_UGens.html).
 
 A `UGen` is created by sending the `UGen` class a `.ar` or `.kr` message.
 
@@ -160,7 +160,7 @@ A `UGen` is created by sending the `UGen` class a `.ar` or `.kr` message.
 * `SinOsc.ar` will result in an `audio rate` Sine Oscillator
 * `SinOsc.kr` will result in a `control rate` Sine Oscillator
 
-Not all `UGens` can be instantiated at both audio and control rate, though, so it is best practice to double check the Class Methods for each `UGen` prior to use. Follow along by typing `SinOsc` in an empty `SC` window, selecting it, and hitting **Command+D** to look the selection up in the documentation.
+Not all `UGens` can be instantiated at both audio and control rate, though, so it is best practice to double check the `Class Methods` for each `UGen` prior to use. Follow along by typing `SinOsc` in an empty `SC` window, selecting it, and hitting **Command+D** to look the selection up in the documentation.
 
 *For Example*
 
@@ -214,6 +214,14 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
         2. we set `phase` to 0.0
         3. we use the argument `amp` to create a placeholder for the `SinOsc` `amplitude`, allowing one to change the volume of a `Synth` instance while it is running
 
+3. `Out.ar( 0, env * sig  )`:
+
+    * The `Out` `UGen` converts a `digital` signal into an `analog` signal (this process is kown as `Digital to Analog Conversion`, or `DAC` for short). Pull it up in the docs and let's review the `Class Methods`:
+
+        * `bus`: the index, or position, to write the output signal to. More simply: unless you have a good reason to do otherwise you can just put the number `0` here
+        * `channelsArray`: the (sound) signal that you want to send to the bus
+
+    * In our example (above) `bus` is set to `0` and `channelsArray` applies the `Envelope` to the `SinOsc` (by multiplying `env` by `sig`). Note: the output signal is stereo because we used `multichannel expansion` in the `freq` parameter of `SinOsc`.
 
 ### sender.py
 
