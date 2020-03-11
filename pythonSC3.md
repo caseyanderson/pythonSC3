@@ -223,14 +223,46 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
     * In our example (above) `bus` is set to `0` and `channelsArray` applies the `Envelope` to the `SinOsc` (by multiplying `env` by `sig`). Note: the output signal is stereo because we used `multichannel expansion` in the `freq` parameter of `SinOsc`.
 
-#### OSCFunc
+#### OSCFuncs
+
+SuperCollider has two different `OSC` listener objects: `OSCFunc` and `OSCdef`. We will focus on `OSCFunc`.
+
+*For Example*
+
+```supercollider
+OSCFunc( { | msg, time, addr, port |
+    var dur, freq, fund = 200, partial;
+
+    freq = msg[1] * fund;
+    dur = ~dur.value;
+    ( "freq is" + freq + "dur is" + dur ).postln;
+    Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] );
+}, "/engine" );
+```
+
+The `OSCFunc` above handles all of our control messages from Python, follow along as we go through it line-by-line:
+
+1. we start by setting arguments `OSCFunc`
+
+    `| msg, time, addr, port |`
+
+    Note: the above is **straight out of the docs for** `OSCFunc`
+
+2. next we declare variables and set the default values we need
+
+    `var dur, freq, fund = 200, partial`
+
+    Note: you do not **have** to set defaults for variables or arguments but it's generally a good idea
+
+3. `freq = msg[1] * fund`
+
+    An `OSCFunc` is capable of parsing `OpenSoundControl` messages and triggering events. Messages from elsewhere arrive to our OSCFunc in a standardized format: `[address, data]`. In other words `msg[0]` will contain the `address`, or label, the `OSCFunc` uses to identify a particular message and `msg[1]` will contain the data we want to use.
+
 
 
 ### sender.py
 
 explanations go here
-
-
 !!!!!!!!!
 OLD DRAFT EXPLANATIONS BELOW, REWRITE!
 
