@@ -216,7 +216,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 3. `Out.ar( 0, env * sig  )`:
 
-    * The `Out` `UGen` converts a `digital` signal into an `analog` signal (this process is kown as `Digital to Analog Conversion`, or `DAC` for short). Pull it up in the docs and let's review the `Class Methods`:
+    * The `Out` `UGen` converts a `digital` signal into an `analog` signal (this process is kown as `Digital to Analog Conversion`, or `DAC` for short). Pull `Out` up in the docs and let's review the `Class Methods`:
 
         * `bus`: the index, or position, to write the output signal to. More simply: unless you have a good reason to do otherwise you can just put the number `0` here
         * `channelsArray`: the (sound) signal that you want to send to the bus
