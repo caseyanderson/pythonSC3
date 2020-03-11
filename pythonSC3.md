@@ -46,7 +46,7 @@ The window that says `post` is the console/post window. Messages/Errors from SC 
 
 ## Communicating from Python to SC (Demo)
 
-This section describes the basic usage procedure for `receiver.scd` and `sender.py`. An explanation of the code in each file can be found in the subsequent section ([Communicating from SC to Python (Analysis)](https://gist.github.com/caseyanderson/985c947331f7e242284e7ee92718dd9e#communicating-from-sc-to-python-analysis)).
+This section describes the basic usage procedure for `receiver.scd` and `sender.py`. An explanation of the code in each file can be found in the subsequent section ([Communicating from SC to Python (Analysis)](https://github.com/caseyanderson/pythonSC3/blob/master/pythonSC3.md#communicating-from-sc-to-python-analysis)).
 
 ### SuperCollider
 
@@ -212,7 +212,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
         1. we use `multichannel expansion` on the `SinOsc` `frequency` argument to create a slight throb, via difference tones, and to convert our `Mono` `Synth` to `Stereo`
         2. we set `phase` to 0.0
-        3. we use the argument `amp` to create a placeholder for the `SinOsc` `amplitude`
+        3. we use the argument `amp` to create a placeholder for the `SinOsc` `amplitude`, allowing one to change the volume of a `Synth` instance while it is running
 
 
 ### sender.py
