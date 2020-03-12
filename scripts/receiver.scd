@@ -20,7 +20,7 @@ s.waitForBoot({
 
     ~dur = { exprand( 0.5, 6.0 )};
 
-    OSCFunc( { | msg, time, addr, port |
+    OSCFunc( { | msg |
 		var dur, freq, fund = 200;
         // msg.postln;
 
