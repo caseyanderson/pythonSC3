@@ -227,7 +227,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 #### OSCFuncs
 
-SuperCollider has two different `OSC` message receiver `UGens`: `OSCFunc` and `OSCdef`. We will focus on `OSCFunc`.
+SuperCollider has two `UGens` for receiving `OSC` messages: `OSCFunc` and `OSCdef`. We will focus on `OSCFunc`.
 
 *For Example*
 
@@ -243,7 +243,7 @@ OSCFunc( { | msg |
 }, "/engine" );
 ```
 
-The `OSCFunc` above handles all of our control messages from Python, follow along as we go through it line-by-line:
+The `OSCFunc` above handles our control messages from Python, follow along as we go through it line-by-line:
 
 1. we start by setting the only argument we need for this `OSCFunc`
 
@@ -265,15 +265,15 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
 5. `( "freq is" + freq + "dur is" + dur ).postln`
 
-    Here we concatenate, or join, two labels with two variables so we can monitor the `freq` and `dur` values that will be passed to the next line of code. If we did not have this line we would only be able to deduce this information by listening, which would be difficult and error prone.
+    Here we `concatenate`, or join, two labels with two variables so we can monitor the `freq` and `dur` values that will be passed to the next line of code. If we did not have this line we would only be able to deduce this information by listening, which would be difficult and error-prone.
 
 6. `Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] )`
 
-    This line makes a new `instance` of the `Synth` `\sin`, defined by the `SynthDef` at the top of the file. In other words, our OSCFunc creates and plays a new sine tone (with a random frequency and duration) for every message it receives.
+    This line makes a new `instance` of the `Synth` `\sin`, defined by the `SynthDef` at the top of the file. In other words, our `OSCFunc` creates and plays a new sine tone (with a random frequency and duration) every time it receives a new message.
 
 7. `}, "/engine" )`
 
-    The last line of our `OSCFunc` shows that this particular `OSCFunc` only responds to messages that begin with the address `"/engine"`.
+    This particular `OSCFunc` only responds to messages that begin with the address `"/engine"`.
 
 
 #### Server Options
