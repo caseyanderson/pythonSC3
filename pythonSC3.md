@@ -76,7 +76,8 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
         ~dur = {exprand(0.5, 6.0)};
 
         OSCFunc( { | msg, time, addr, port |
-            var dur, freq, fund = 200, partial;
+            var dur, freq, fund = 200;
+            // msg.postln;
 
             freq = msg[1] * fund;
             dur = ~dur.value;
@@ -205,7 +206,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
     * `env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );`
 
         * the `env` variable stores the `SynthDef`'s `Envelope`, `Env.linen`, a `linear` Envelope instance. There are lots of different `Envelope` instances which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` times
-        * `Done.freeSelf`: `Done` monitors another `UGen` to see when it is finished. In this case `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where duration is `attack` + `sustain` + `release`)
+        * `Done.freeSelf`: `Done` monitors another `UGen` to see when it is finished. In this case `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where total duration is `attack` + `sustain` + `release`)
         * the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
 
     * `sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp )`
@@ -225,13 +226,14 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 #### OSCFuncs
 
-SuperCollider has two different `OSC` listener objects: `OSCFunc` and `OSCdef`. We will focus on `OSCFunc`.
+SuperCollider has two different `OSC` message receiver `UGens`: `OSCFunc` and `OSCdef`. We will focus on `OSCFunc`.
 
 *For Example*
 
 ```supercollider
 OSCFunc( { | msg, time, addr, port |
-    var dur, freq, fund = 200, partial;
+    var dur, freq, fund = 200;
+    // msg.postln;
 
     freq = msg[1] * fund;
     dur = ~dur.value;
