@@ -21,7 +21,9 @@ s.waitForBoot({
     ~dur = {exprand(0.5, 6.0)};
 
     OSCFunc( { | msg, time, addr, port |
-		var dur, freq, fund = 200, partial;
+		var dur, freq, fund = 200;
+
+        msg.postln;
 
 		freq = msg[1] * fund;
 		dur = ~dur.value;
