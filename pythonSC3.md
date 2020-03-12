@@ -66,7 +66,7 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
         SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
             var env, sig;
 
-            env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
+            env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );
             sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
             Out.ar( 0, sig  );
         }).add;
@@ -181,7 +181,7 @@ A `SynthDef`, or `Synth Definition`, tells the server how to generate audio and 
 SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
     var env, sig;
 
-    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
+    env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );
     sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp ) * env;
     Out.ar( 0, sig  );
 }).add;
@@ -202,11 +202,11 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 2. next we declare two variables: `env` and `sig`
 
-    * `env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 )`
+    * `env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );`
 
-        * the `env` variable stores the `SynthDef`'s `Envelope Generator`, `EnvGen.kr`, here set to generate a `linear` Envelope with `Env.linen`. There are lots of different `Envelope` instances, which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` durations
+        * the `env` variable stores the `SynthDef`'s `Envelope`, `Env.linen`, a `linear` Envelope instance. There are lots of different `Envelope` instances which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` times
+        * `Done.freeSelf`: `Done` monitors another `UGen` to see when it is finished. In this case `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where duration is `attack` + `sustain` + `release`)
         * the `trig` argument gates, or starts, the `Envelope`. Note that this defaults to `0`
-        * `doneActions`: `doneActions` tell the `scserver` what to do when the `Synth` is done. In this case the `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where duration is `attack` + `sustain` + `release`)
 
     * `sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp )`
 
