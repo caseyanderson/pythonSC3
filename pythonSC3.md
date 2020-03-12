@@ -246,7 +246,7 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
     `| msg, time, addr, port |`
 
-    Note: this is **straight out of the docs for** `OSCFunc`
+    Note: this is **straight out of the docs**
 
 2. next we declare variables and set any default values we need
 
@@ -256,9 +256,13 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
 3. `freq = msg[1] * fund`
 
-    An `OSCFunc` is capable of parsing `OpenSoundControl` messages and triggering events. Messages from elsewhere arrive to our `OSCFunc` in a standardized format: `[address, data]`. In other words `msg[0]` will contain the `address`, or label, the `OSCFunc` uses to identify a the correct message and `msg[1]` will contain the data we want to use. In our example we multiply the data by the variable `fund`, which we stores the `fundamental frequency` of our `SinOsc`, and store the result to `freq`.
+    An `OSCFunc` is capable of parsing `OpenSoundControl` messages and triggering events. Messages from elsewhere arrive to our `OSCFunc` in a standardized format: `[address, data]`. In other words `msg[0]` will contain the `address`, or label, the `OSCFunc` uses to identify the correct message and `msg[1]` will contain the data we want to use. In our example we multiply the incoing frequency data by the variable `fund`, which stores the `fundamental frequency` of our `SinOsc`, and store the result to `freq`
 
-4.
+4. `dur = ~dur.value`
+
+    Two lines above the `OSCFunc` is a function that we have not yet discussed: `~dur = {exprand(0.5, 6.0)}`. When we `evaluate` this function it will return a number between `0.5` and `6.0`. In order to `evaluate` the function, or to get a random number between the desired range, we `.value` it. Here we execute the function at `~dur` and store the result to the variable `dur` for later.
+
+
 
 
 
