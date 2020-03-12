@@ -15,14 +15,14 @@ client.connect(('127.0.0.1', args.port))
 
 msg = pyOSC3.OSCMessage()
 
-address = ''.join(["/", args.addr ]) # replace with argparser
+address = ''.join(["/", args.addr ])
 
 msg.setAddress(str(address))
 
 freq = random.randint(1, 12)
 msg.append(freq)
 
-client.send(msg)
+client.send(msg) # send one message
 
 keyPress = False
 trigCount = 0
