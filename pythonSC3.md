@@ -73,9 +73,9 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
 
         s.sync;
 
-        ~dur = {exprand(0.5, 6.0)};
+        ~dur = { exprand(0.5, 6.0 )};
 
-        OSCFunc( { | msg, time, addr, port |
+        OSCFunc( { | msg |
             var dur, freq, fund = 200;
             // msg.postln;
 
@@ -231,7 +231,7 @@ SuperCollider has two different `OSC` message receiver `UGens`: `OSCFunc` and `O
 *For Example*
 
 ```supercollider
-OSCFunc( { | msg, time, addr, port |
+OSCFunc( { | msg |
     var dur, freq, fund = 200;
     // msg.postln;
 
@@ -244,15 +244,13 @@ OSCFunc( { | msg, time, addr, port |
 
 The `OSCFunc` above handles all of our control messages from Python, follow along as we go through it line-by-line:
 
-1. we start by setting arguments for `OSCFunc`
+1. we start by setting the only argument we need for this `OSCFunc`
 
-    `| msg, time, addr, port |`
-
-    Note: this is **straight out of the docs**
+    `| msg |`
 
 2. next we declare variables and set any default values we need
 
-    `var dur, freq, fund = 200, partial`
+    `var dur, freq, fund = 200`
 
     Note: you do not **have** to set defaults for variables or arguments but it's generally a good idea
 
@@ -264,9 +262,17 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
     Two lines above the `OSCFunc` is a function that we have not yet discussed: `~dur = {exprand(0.5, 6.0)}`. When we `evaluate` this function it will return a randomly generated number between `0.5` and `6.0`. In order to `evaluate` the function, or to get a random number between the desired range, we `.value` it. Here we execute the function at `~dur` and store the result to the variable `dur` for later.
 
+5. `( "freq is" + freq + "dur is" + dur ).postln`
 
+    Here we concatenate, or join, two labels with two variables so we can monitor the `freq` and `dur` values that will be passed to the next line of code. If we did not have this line we would only be able to deduce this information by listening, which would be difficult and error prone.
 
+6. `Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] )`
 
+    This line makes a new `instance` of the `Synth` `\sin`, defined by the `SynthDef` at the top of the file. In other words, our OSCFunc creates and plays a new sine tone (with a random frequency and duration) for every message it receives.
+
+7. `}, "/engine" )`
+
+    The last line of our `OSCFunc` shows that this particular `OSCFunc` only responds to messages that begin with the address `"/engine"`.
 
 ### sender.py
 
