@@ -22,13 +22,16 @@ msg.setAddress(str(address))
 freq = random.randint(1, 12)
 msg.append(freq)
 
-client.send(msg) # send one message
-
 keyPress = False
 trigCount = 0
 
 while True:
-    if keyboard.is_pressed('Space') and keyPress == False:
+    if trigCount == 0 and keyboard.is_pressed('Space') and keyPress == False:
+        trigCount+=1
+        print(''.join(["trig count: ", str(trigCount)]))
+        client.send(msg)
+        keyPress = True
+    elif trigCount > 0 and keyboard.is_pressed('Space') and keyPress == False:
         trigCount+=1
         print(''.join(["trig count: ", str(trigCount)]))
         msg[0] = random.randint(1, 12)
