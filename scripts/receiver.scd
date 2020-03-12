@@ -11,19 +11,18 @@ s.waitForBoot({
     SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
 	    var env, sig;
 
-	    env = EnvGen.kr( Env.linen( attack, sus, release ), trig, doneAction: 2 );
-	    sig = SinOsc.ar( [ freq, freq * 0.999 ], 0.0, amp );
+        env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );
+        sig = SinOsc.ar([ freq, freq * 0.999 ], 0.0, amp );
 	    Out.ar( 0, env * sig  );
     }).add;
 
     s.sync;
 
-    ~dur = {exprand(0.5, 6.0)};
+    ~dur = { exprand( 0.5, 6.0 )};
 
     OSCFunc( { | msg, time, addr, port |
 		var dur, freq, fund = 200;
-
-        msg.postln;
+        // msg.postln;
 
 		freq = msg[1] * fund;
 		dur = ~dur.value;
