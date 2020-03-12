@@ -274,9 +274,9 @@ The `OSCFunc` above handles our control messages from Python, follow along as we
     This particular `OSCFunc` only responds to messages that begin with the address `"/engine"`.
 
 
-#### s.waitForBoot()`
+#### s.waitForBoot()
 
-`s.waitForBoot` is a `Server` method that boots the `Server` for you, if it is not already running, and evaluates the function `onComplete` immediately thereafter. In this case the **entire file** is the `onComplete` function.
+`s.waitForBoot` is a `Server` method that boots the `Server`, if it is not already running, and evaluates the function `onComplete` immediately thereafter. In this case the **entire file** is the `onComplete` function.
 
 
 ### sender.py
