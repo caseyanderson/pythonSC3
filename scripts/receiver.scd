@@ -16,8 +16,6 @@ s.waitForBoot({
 	    Out.ar( 0, env * sig  );
     }).add;
 
-    s.sync;
-
     ~dur = { exprand( 0.5, 6.0 )};
 
     OSCFunc( { | msg |
