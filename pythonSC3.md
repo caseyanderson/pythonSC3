@@ -71,8 +71,6 @@ This section describes the basic usage procedure for `receiver.scd` and `sender.
             Out.ar( 0, sig  );
         }).add;
 
-        s.sync;
-
         ~dur = { exprand(0.5, 6.0 )};
 
         OSCFunc( { | msg |
@@ -276,19 +274,9 @@ The `OSCFunc` above handles our control messages from Python, follow along as we
     This particular `OSCFunc` only responds to messages that begin with the address `"/engine"`.
 
 
-#### Server Options
+#### s.waitForBoot()`
 
-1. `s.options.memSize = 2097152`
-
-    blah
-
-2. `s.waitForBoot()`
-
-    blah
-
-3. `s.sync`
-
-    blah
+`s.waitForBoot` is a `Server` method that boots the `Server` for you, if it is not already running, and evaluates the function `onComplete` immediately thereafter. In this case the **entire file** is the `onComplete` function.
 
 
 ### sender.py
