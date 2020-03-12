@@ -260,7 +260,7 @@ The `OSCFunc` above handles all of our control messages from Python, follow alon
 
 4. `dur = ~dur.value`
 
-    Two lines above the `OSCFunc` is a function that we have not yet discussed: `~dur = {exprand(0.5, 6.0)}`. When we `evaluate` this function it will return a number between `0.5` and `6.0`. In order to `evaluate` the function, or to get a random number between the desired range, we `.value` it. Here we execute the function at `~dur` and store the result to the variable `dur` for later.
+    Two lines above the `OSCFunc` is a function that we have not yet discussed: `~dur = {exprand(0.5, 6.0)}`. When we `evaluate` this function it will return a randomly generated number between `0.5` and `6.0`. In order to `evaluate` the function, or to get a random number between the desired range, we `.value` it. Here we execute the function at `~dur` and store the result to the variable `dur` for later.
 
 
 
