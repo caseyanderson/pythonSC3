@@ -315,6 +315,69 @@ Follow along as we go through lines 12 - 24 in detail:
 4. We concatenate a forward slash (`/`) with the `addr` (or address, the label that our `OSCFunc` in `receiver.scd` uses to identify messages to respond to), here set via command line argument or default: `address = ''.join(["/", str(args.addr)])`
 5. We set the message: `msg.setAddress(str(address))`
 6. And `append` the data we want to send to `SuperCollider` (the `freq` or frequency): `msg.append(args.freq)`
-7. Finally we send the message to `SuperCollider`, which create and play a new sine tone in response: `client.send(msg)`
+7. Finally we send the message to `SuperCollider`, which creates and plays a new sine tone in response: `client.send(msg)`
 
 
+### keyboard_send.py
+
+Note: this section assumes installation of `keyboard`: `pip3 install keybaord`
+
+```python
+import argparse
+import keyboard
+import pyOSC3
+import random
+from time import sleep
+
+# parse command line arguments
+parser = argparse.ArgumentParser()
+parser.add_argument("--addr", type=str, help="the address", default="engine")
+parser.add_argument("--port", type=int, help="the listener's port number", default=57120)
+args = parser.parse_args()
+
+client = pyOSC3.OSCClient()
+client.connect(('127.0.0.1', args.port))
+
+msg = pyOSC3.OSCMessage()
+
+address = ''.join(["/", args.addr ])
+
+msg.setAddress(str(address))
+
+freq = random.randint(1, 12)
+msg.append(freq)
+
+keyPress = False
+trigCount = 0
+
+while True:
+    if trigCount == 0 and keyboard.is_pressed('Space') and keyPress == False:
+        trigCount+=1
+        print(''.join(["trig count: ", str(trigCount)]))
+        client.send(msg)
+        keyPress = True
+    elif trigCount > 0 and keyboard.is_pressed('Space') and keyPress == False:
+        trigCount+=1
+        print(''.join(["trig count: ", str(trigCount)]))
+        msg[0] = random.randint(1, 12)
+        client.send(msg)
+        keyPress = True
+    elif keyboard.is_pressed('Space') == False and keyPress == True:
+        keyPress = False
+    elif keyboard.is_pressed('q') == True:
+        print("goodbye!")
+        client.close()
+        break
+    sleep(0.001)
+```
+
+`keyboard_send.py` demonstrates how to repeatedly send `OSC` `Messages` for every press of the `space` bar.
+
+
+#### run keyboard_send.py
+
+1. download [keyboard_send.py](scripts/keyboard_send.py) to your computer
+2. make keyboard_send.py executable: `sudo chmod +x keyboard_send.py`
+3. run keyboard_send.py (yes, you **have** to use `sudo): `sudo python3 keyboard_send.py`
+4. hit the space bar repeatedly to trigger new sine tones
+5. when you are done hit `q` to quit
