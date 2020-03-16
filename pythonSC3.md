@@ -30,7 +30,7 @@ Run the following command in the terminal to install [pyOSC3](https://github.com
 
 [OpenSoundControl](http://opensoundcontrol.org/introduction-osc) (or `OSC`) is a network-based protocol for communication between multiple computers or multiple programs on the same computer.
 
-Communicating via `OSC` typically involves sending messages (with some network [`IP`] address) to a receiver (if there is a receiver currently listening). If there is no receiver the messages the sender outputs simply disappear. Our audio engine and receiver will live in `SuperCollider` and our controller/message sender will live in `Python`.
+Communicating via `OSC` typically involves sending messages (with some network [`IP`] address) to a receiver (if there is a receiver currently listening). If there is no receiver the messages the sender outputs simply disappear. Our audio engine/message receiver will live in `SuperCollider` and our controller/message sender will live in `Python`.
 
 
 ### SuperCollider
