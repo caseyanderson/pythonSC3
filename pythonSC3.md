@@ -320,7 +320,7 @@ Follow along as we go through lines 12 - 24 in detail:
 
 ### keyboard_sender.py
 
-Note: this section assumes installation of `keyboard`: `pip3 install keybaord`
+Note: this section assumes installation of `keyboard`: `pip3 install keyboard`
 
 ```python
 import argparse
