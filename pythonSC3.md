@@ -318,7 +318,7 @@ Follow along as we go through lines 12 - 24 in detail:
 7. Finally we send the message to `SuperCollider`, which creates and plays a new sine tone in response: `client.send(msg)`
 
 
-### keyboard_send.py
+### keyboard_sender.py
 
 Note: this section assumes installation of `keyboard`: `pip3 install keybaord`
 
@@ -371,13 +371,13 @@ while True:
     sleep(0.001)
 ```
 
-`keyboard_send.py` demonstrates how to repeatedly send `OSC` `Messages` for every press of the `space` bar.
+`keyboard_sender.py` demonstrates how to repeatedly send `OSC` `Messages` for every press of the `space` bar.
 
 
-#### run keyboard_send.py
+#### run keyboard_sender.py
 
-1. download [keyboard_send.py](scripts/keyboard_send.py) to your computer
-2. make keyboard_send.py executable: `sudo chmod +x keyboard_send.py`
-3. run keyboard_send.py (yes, you **have** to use `sudo): `sudo python3 keyboard_send.py`
+1. download [keyboard_sender.py](scripts/keyboard_sender.py) to your computer
+2. make keyboard_sender.py executable: `sudo chmod +x keyboard_sender.py`
+3. run keyboard_sender.py (yes, you **have** to use `sudo): `sudo python3 keyboard_sender.py`
 4. hit the space bar repeatedly to trigger new sine tones
 5. when you are done hit `q` to quit
