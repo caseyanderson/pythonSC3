@@ -201,7 +201,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
 
 2. next we declare two variables: `env` and `sig`
 
-    * `env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig );`
+    * `env = Env.linen( attack, sus, release ).kr( Done.freeSelf, trig )`
 
         * the `env` variable stores the `SynthDef`'s `Envelope`, `Env.linen`, a `linear` Envelope instance. There are lots of different `Envelope` instances which one can explore [here](http://doc.sccode.org/Classes/Env.html). Since `\sin` uses a fixed duration envelope we have to provide it with `attack`, `sustain`, and `release` times
         * `Done.freeSelf`: `Done` monitors another `UGen` to see when it is finished. In this case `scserver` will `free`, or remove, the `Synth` at the end of the `Envelope` (where total duration is `attack` + `sustain` + `release`)
@@ -280,5 +280,41 @@ The `OSCFunc` above handles our control messages from Python, follow along as we
 
 
 ### sender.py
+
+#### importing modules
+
+`sender.py` uses two external modules:
+
+1. `pyOSC3`
+2. `argparse`
+
+In order to run `sender.py` we use the following, which also provides a convenient example of `argparse` usage: `python3 sender.py --freq 400.0`
+
+`argparse` provides an easy interface to command line arguments like `freq` in the line above.
+
+In the following example we create an `ArgumentParser()` `instance`, declare our `arguments` (`freq`, `addr`, and `port`), set defaults, and activate them with `parser.parse_args()`
+
+```python
+parser = argparse.ArgumentParser()
+parser.add_argument("--freq", type=float, help="the frequency", default=200.0)
+parser.add_argument("--addr", type=str, help="the address", default="engine")
+parser.add_argument("--port", type=int, help="the listener's port number", default=57120)
+args = parser.parse_args()
+```
+
+The default values for `addr` and `port`, above, conform to the default port `SuperCollider` uses (`57120`) and the `address` of the `OSCFunc` in `receiver.scd`, permitting us to skip setting these `arguments` in the line `python3 sender.py --freq 400.0`
+
+
+#### OSCClient
+
+Follow along as we go through lines 12 - 24 in detail:
+
+1. We create an `OSCClient()` `instance` and store it to the variable `client`: `client = pyOSC3.OSCClient()`
+2. We connect the `OSCClient()` to our computer's `localhost` server (`127.0.0.1`) and the port on which `SuperCollider` listens (`57120`, here passed via command line argument or default): `client.connect(('127.0.0.1', args.port))`
+3. We create an `OSCMessage` instance and save it to the variable `msg`: `msg = pyOSC3.OSCMessage()`
+4. We concatenate a forward slash (`/`) with the `addr` (or address, the label that our `OSCFunc` in `receiver.scd` uses to identify messages to respond to), here set via command line argument or default: `address = ''.join(["/", str(args.addr)])`
+5. We set the message: `msg.setAddress(str(address))`
+6. And `append` the data we want to send to `SuperCollider` (the `freq` or frequency): `msg.append(args.freq)`
+7. Finally we send the message to `SuperCollider`, which create and play a new sine tone in response: `client.send(msg)`
 
 
