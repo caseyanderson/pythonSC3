@@ -377,7 +377,7 @@ while True:
 #### run keyboard_sender.py
 
 1. download [keyboard_sender.py](scripts/keyboard_sender.py) to your computer
-2. make keyboard_sender.py executable: `sudo chmod +x keyboard_sender.py`
-3. run keyboard_sender.py (yes, you **have** to use `sudo): `sudo python3 keyboard_sender.py`
+2. make `keyboard_sender.py` executable: `sudo chmod +x keyboard_sender.py`
+3. run `keyboard_sender.py` (yes, you **have** to use `sudo): `sudo python3 keyboard_sender.py`
 4. hit the space bar repeatedly to trigger new sine tones
 5. when you are done hit `q` to quit
