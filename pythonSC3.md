@@ -213,7 +213,7 @@ The `ugenGraphFunc` dictates most of the characteristics of our `SynthDef`. Foll
         * we set `phase` to 0.0
         * we use the argument `amp` to create a placeholder for the `SinOsc` `amplitude`, allowing one to change the volume of a `Synth` instance while it is running
 
-3. `Out.ar( 0, env * sig  )`:
+3. `Out.ar( 0, env * sig  )`
 
     * The `Out` `UGen` converts a `digital` signal into an `analog` signal (this process is kown as `Digital to Analog Conversion`, or `DAC` for short). Pull `Out` up in the docs and let's review the `Class Methods`:
 
@@ -281,5 +281,4 @@ The `OSCFunc` above handles our control messages from Python, follow along as we
 
 ### sender.py
 
-explanations go here
 
