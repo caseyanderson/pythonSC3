@@ -5,7 +5,9 @@ SC receives message (beginning with "/engine") from Python
 
 */
 
+s.options.outDevice_("Built-in Output"); // or s.options.outDevice_("UltraLite mk3 Hybrid");
 s.options.memSize = 2097152;
+
 s.waitForBoot({
 
     SynthDef( \sin, { | amp = 0.0, attack = 0.01, freq = 333, release = 1, sus = 2, trig = 0 |
