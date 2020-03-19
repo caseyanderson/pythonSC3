@@ -3,9 +3,12 @@
 receiver.scd (v1)
 SC receives message (beginning with "/engine") from Python
 
+s.options.outDevice_("BlackHole 16ch"); // or s.options.outDevice_("UltraLite mk3 Hybrid");
+
+
 */
 
-s.options.outDevice_("Built-in Output"); // or s.options.outDevice_("UltraLite mk3 Hybrid");
+s.options.outDevice_("UltraLite mk3 Hybrid"); // or s.options.outDevice_("UltraLite mk3 Hybrid");
 s.options.memSize = 2097152;
 
 s.waitForBoot({
@@ -27,6 +30,6 @@ s.waitForBoot({
 		freq = msg[1] * fund;
 		dur = ~dur.value;
 		( "freq is" + freq + "dur is" + dur ).postln;
-		Synth.new( \sin, [ \amp, 0.9, \freq, freq, \sus, dur, \trig, 1 ] );
+		Synth.new( \sin, [ \amp, 0.6, \freq, freq, \sus, dur, \trig, 1 ] );
 	}, "/engine" );
 });
